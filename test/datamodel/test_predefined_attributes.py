@@ -12,7 +12,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(__name__, "test_predefined_attributes")
 
     def test___doc__is_none_when_documentation_is_not_exist(self):
-        # TODO documentation 이 있는 경우도 테스트 해야함
         self.assertEqual(__doc__, None)
 
     def test_type_of___file___is_str(self):
