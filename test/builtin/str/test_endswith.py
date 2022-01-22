@@ -1,19 +1,23 @@
 import unittest
 
+from parameterized import parameterized
+
 
 class MyTestCase(unittest.TestCase):
-    def test_endswith(self):
-        self.assertEqual("a/b/c".endswith("c"), True)
-        self.assertEqual("a/b/c".endswith("/c"), True)
-        self.assertEqual("a/b/c".endswith("b/c"), True)
-        self.assertEqual("a/b/c".endswith("/b/c"), True)
-        self.assertEqual("a/b/c".endswith("a/b/c"), True)
-
-        self.assertEqual("a/b/c".endswith("c/"), False)
-        self.assertEqual("a/b/c".endswith("/c/"), False)
-        self.assertEqual("a/b/c".endswith("b/c/"), False)
-        self.assertEqual("a/b/c".endswith("/b/c/"), False)
-        self.assertEqual("a/b/c".endswith("a/b/c/"), False)
+    @parameterized.expand([
+        ["a/b/c", "c", True],
+        ["a/b/c", "/c", True],
+        ["a/b/c", "b/c", True],
+        ["a/b/c", "/b/c", True],
+        ["a/b/c", "a/b/c", True],
+        ["a/b/c", "c/", False],
+        ["a/b/c", "/c/", False],
+        ["a/b/c", "b/c/", False],
+        ["a/b/c", "/b/c/", False],
+        ["a/b/c", "a/b/c/", False],
+    ])
+    def test_endswith(self, string, endswith, result):
+        self.assertEqual(string.endswith(endswith), result)
 
 
 if __name__ == '__main__':
