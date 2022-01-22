@@ -4,6 +4,10 @@ from parameterized import parameterized
 
 
 class MyTestCase(unittest.TestCase):
+    """
+    https://docs.python.org/3.10/library/stdtypes.html#str.endswith
+    """
+    
     @parameterized.expand([
         ["a/b/c", "c", True],
         ["a/b/c", "/c", True],
