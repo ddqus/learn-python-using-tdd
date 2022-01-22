@@ -19,6 +19,13 @@ class MyTestCase(unittest.TestCase):
     def test_endswith(self, string, endswith, result):
         self.assertEqual(string.endswith(endswith), result)
 
+    @parameterized.expand([
+        ["", "", True],
+        ["", ".", False],
+    ])
+    def test_endswith_boundary_value(self, string, endswith, result):
+        self.assertEqual(string.endswith(endswith), result)
+
 
 if __name__ == '__main__':
     unittest.main()
