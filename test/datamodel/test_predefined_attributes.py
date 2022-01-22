@@ -9,7 +9,9 @@ class MyTestCase(unittest.TestCase):
     """
 
     def test___name__is_module_name(self):
-        self.assertEqual(__name__, "test_predefined_attributes")
+        # TODO 실행하는 scope 에 따라 달라진다. scope 를 어떻게 알 수 있는가?
+        # self.assertEqual(__name__, "test_predefined_attributes")
+        self.assertTrue(__name__.endswith("test_predefined_attributes"))
 
     def test___doc__is_none_when_documentation_is_not_exist(self):
         self.assertEqual(__doc__, None)
