@@ -7,7 +7,7 @@ class MyTestCase(unittest.TestCase):
     """
     https://docs.python.org/3.10/library/stdtypes.html#str.endswith
     """
-    
+
     @parameterized.expand([
         ["a/b/c", "c", True],
         ["a/b/c", "/c", True],
@@ -28,6 +28,26 @@ class MyTestCase(unittest.TestCase):
         ["", ".", False],
     ])
     def test_endswith_boundary_value(self, string, endswith, result):
+        self.assertEqual(string.endswith(endswith), result)
+
+    @parameterized.expand([
+        ["a/b/c", (
+                "c",
+                "/c",
+                "b/c",
+                "/b/c",
+                "a/b/c",
+        ), True],
+        ["a/b/c", (
+                "c/",
+                "/c/",
+                "b/c/",
+                "/b/c/",
+                "a/b/c/",
+        ), False],
+    ])
+    def test_endswith_suffix_can_be_tuple(self, string, endswith, result):
+        # TODO tuple 외의 자료형도 가능한가? -> test
         self.assertEqual(string.endswith(endswith), result)
 
 
