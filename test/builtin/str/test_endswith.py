@@ -47,8 +47,23 @@ class MyTestCase(unittest.TestCase):
         ), False],
     ])
     def test_endswith_suffix_can_be_tuple(self, string, endswith, result):
-        # TODO tuple 외의 자료형도 가능한가? -> test
         self.assertEqual(string.endswith(endswith), result)
+
+    @parameterized.expand([
+        ["a/b/c", ["list"], "list"],
+        ["a/b/c", {"set"}, "set"],
+        ["a/b/c", {"dict": "v"}, "dict"],
+        ["a/b/c", True, "bool"],
+        ["a/b/c", None, "NoneType"],
+        ["a/b/c", 1, "int"],
+    ])
+    def test_endswith_suffix_type(self, string, endswith, suffix_type):
+        with self.assertRaises(Exception) as context:
+            string.endswith(endswith)
+        self.assertEqual(
+            "endswith first arg must be str or a tuple of str, not %s" % suffix_type,
+            str(context.exception)
+        )
 
 
 if __name__ == '__main__':
