@@ -1,1 +1,6 @@
+confluent-kafka
 parameterized
+pylint
+pytest
+python-dotenv
+
