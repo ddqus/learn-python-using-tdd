@@ -21,7 +21,7 @@ def test_consumer():
     consumer = Consumer(_conf)
     assert consumer
 
-    cluster_metadata = consumer.list_topics(_topic)  # type: ClusterMetadata
+    cluster_metadata = consumer.list_topics(_topic, timeout=1)  # type: ClusterMetadata
     topic = cluster_metadata.topics.get(_topic)  # type: TopicMetadata
     assert None is topic.error
 
