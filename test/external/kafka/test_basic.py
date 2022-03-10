@@ -1,6 +1,6 @@
 import os
 
-from confluent_kafka import Consumer
+from confluent_kafka import Consumer, Producer
 from confluent_kafka.admin import ClusterMetadata, TopicMetadata
 
 _conf = {
@@ -28,3 +28,19 @@ def test_consumer():
     consumer.subscribe([_topic])
     msg = consumer.poll(timeout=0.5)
     assert None is msg
+
+
+def test_producer_is_not():
+    if not Consumer(_conf):
+        raise Exception("정상")
+
+    if not Producer(_conf):
+        raise Exception("왜지?")
+
+
+def test_producer():
+    producer = Producer(_conf)
+
+    producer.poll(0)
+    producer.produce(_topic, "test message")
+    producer.flush()
