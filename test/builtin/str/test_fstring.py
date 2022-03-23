@@ -19,3 +19,10 @@ def test_fstring_multiline():
         f"b{dummy}"
     )
     assert longstr == "a@b@"
+
+
+def test_fstring_conversion():
+    sut = "abc"
+    assert str(sut) == "abc"
+    assert str(f"{sut}") == "abc"
+    assert str(f"{sut!r}") == "'abc'"
