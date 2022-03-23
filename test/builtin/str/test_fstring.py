@@ -10,3 +10,12 @@ def test_fstring_conversion():
     assert f"{src_str!a}" == '"a1`\'-=!"'
     assert f"{src_str!s}" == 'a1`\'-=!'
     assert f"{src_str!r}" == '"a1`\'-=!"'
+
+
+def test_fstring_multiline():
+    dummy = "@"
+    longstr = (
+        f"a{dummy}"
+        f"b{dummy}"
+    )
+    assert longstr == "a@b@"
