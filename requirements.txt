@@ -3,3 +3,4 @@ parameterized
 pylint
 pytest
 python-dotenv
+sqlalchemy
