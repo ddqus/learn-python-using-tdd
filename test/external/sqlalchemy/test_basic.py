@@ -1,13 +1,6 @@
-import os
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text, table, column, select
 
-db_url = os.getenv("SQLITE_DB_URL")
-
-engine = create_engine(db_url)
-Session = sessionmaker(engine)
+from . import db_url, engine, Session
 
 
 def test_db_url():
