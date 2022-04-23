@@ -9,6 +9,7 @@ from app.tools import typetool
 
     # sequnce: str, list, tuple
     ("2", ("2",)),
+    ("ab", ("ab",)),
     ([3, 4], (3, 4)),
     ((5, 6), (5, 6)),
 
@@ -25,3 +26,4 @@ from app.tools import typetool
 def test(test_input, expected):
     sut = typetool.tuplify
     assert sut(test_input) == expected
+    assert isinstance(sut(test_input), tuple)
