@@ -1,3 +1,4 @@
+cerberus
 confluent-kafka
 parameterized
 pylint
