@@ -43,7 +43,7 @@ def test_formatting_from_timestamp():
     assert sut == "2021-02-03 04:05:06"
 
 
-def test_millisecond_timestamp():
+def test_strip_milliseconds_from_timestamp():
     def _timestamp_to_second_if_millisecond(timestamp):
         if len(str(timestamp)) == 13:
             return timestamp // 1000
@@ -51,3 +51,10 @@ def test_millisecond_timestamp():
 
     assert _timestamp_to_second_if_millisecond(1612292706123) == 1612292706
     assert _timestamp_to_second_if_millisecond(1612292706) == 1612292706
+
+
+def test_timestamp_can_be_milliseconds_float():
+    sut = datetime.datetime(2021, 2, 3, 4, 5, 6) + datetime.timedelta(milliseconds=123)
+
+    assert sut.timestamp() == 1612292706.123
+    assert round(sut.timestamp() - datetime.datetime(2021, 2, 3, 4, 5, 6).timestamp(), 3) == 0.123
