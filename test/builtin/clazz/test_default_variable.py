@@ -10,6 +10,19 @@ def test_str_is_not_affected():
     assert "n" == b2.name
 
 
+def test_str_is_not_affected_with_init():
+    sut1 = BaseWithInit()
+    sut2 = BaseWithInit()
+
+    assert sut1.name == "n"
+    assert sut2.name == "n"
+
+    sut1.name = "n1"
+
+    assert sut1.name == "n1"
+    assert sut2.name == "n"
+
+
 def test_list_is_affected():
     b1 = Base()
     b2 = Base()
@@ -24,6 +37,19 @@ def test_list_is_affected():
     assert ["a"] == b2.assets
 
 
+def test_list_is_not_affected_with_init():
+    sut1 = BaseWithInit()
+    sut2 = BaseWithInit()
+
+    assert not sut1.assets
+    assert not sut2.assets
+
+    sut1.assets.append("a")
+
+    assert sut1.assets == ["a"]
+    assert not sut2.assets
+
+
 def test_int():
     b1 = Base()
     b2 = Base()
@@ -36,7 +62,31 @@ def test_int():
     assert b2.num == 10
 
 
+def test_int_with_init():
+    sut1 = BaseWithInit()
+    sut2 = BaseWithInit()
+
+    assert sut1.num == 10
+    assert sut2.num == 10
+
+    sut1.num += 1
+
+    assert sut1.num == 11
+    assert sut2.num == 10
+
+
 class Base:
     name: str = "n"
     num: int = 10
     assets = []
+
+
+class BaseWithInit:
+    name: str
+    num: int
+    assets: list
+
+    def __init__(self):
+        self.name = "n"
+        self.num = 10
+        self.assets = []
